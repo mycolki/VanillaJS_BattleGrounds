@@ -15,13 +15,13 @@ import POPULAR_REPOS from "./popularRepos.json";
   7. Enter your Client ID and Secret ID below
 
  */
-const GITHUB_CLIENT_ID = "GITHUB_CLIENT_ID";
-const GITHUB_SECRET_ID = "GITHUB_SECRET_ID";
+const GITHUB_CLIENT_ID = "3063680e5db343d2b61b";
+const GITHUB_SECRET_ID = "8139d23b8c7848e3813f47f88abe6e74f8999db9";
 
 const defaultParams = `?client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_SECRET_ID}`;
 
 // NOTE: Toggle this value to use mock data.
-const USE_MOCK_DATA = false;
+const USE_MOCK_DATA = true;
 
 function getErrorMsg(message, username) {
   if (message === "Not Found") {
@@ -47,43 +47,41 @@ function request(uri) {
 }
 
 // TODO: Refactor with `async/await`
-function getProfile(username) {
+async function getProfile(username) {
   if (USE_MOCK_DATA) {
     return new Promise(function (resolve) {
       resolve(PROFILE);
     });
   }
 
-  return request(
+  const profile = await request(
     `https://api.github.com/users/${username}${defaultParams}`
-  ).then((profile) => {
-    console.log(`PROFILE:::`, JSON.stringify(JSON.parse(profile)));
-    if (profile.message) {
-      throw new Error(getErrorMsg(profile.message, username));
-    }
+  );
 
-    return profile;
-  });
+  // console.log(`PROFILE:::`, JSON.stringify(JSON.parse(profile)));
+
+  if (profile.message) throw new Error(getErrorMsg(profile.message, username));
+
+  return profile;
 }
 
 // TODO: Refactor with `async/await`
-function getRepos(username) {
+async function getRepos(username) {
   if (USE_MOCK_DATA) {
     return new Promise(function (resolve) {
       resolve(PERSONAL_REPOS);
     });
   }
 
-  return request(
+  const repos = await request(
     `https://api.github.com/users/${username}/repos${defaultParams}&per_page=100`
-  ).then((repos) => {
-    console.log(`REPOSE:::`, JSON.stringify(JSON.parse(repos)));
-    if (repos.message) {
-      throw new Error(getErrorMsg(repos.message, username));
-    }
+  );
 
-    return repos;
-  });
+  // console.log(`REPOSE:::`, JSON.stringify(JSON.parse(repos)));
+
+  if (repos.message) throw new Error(getErrorMsg(repos.message, username));
+
+  return repos;
 }
 
 function getStarCount(repos) {

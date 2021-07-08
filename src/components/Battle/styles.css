@@ -1,0 +1,35 @@
+section {
+  text-align: center;
+}
+
+button {
+  outline: 0;
+  border: 0;
+  background-color: rgb(3, 48, 49);
+  cursor: pointer;
+}
+
+.centerText {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.players {
+  display: flex;
+  flex: 1 1 100%;
+}
+
+.player {
+  width: 100%;
+}
+
+.title {
+  font-size: 2em;
+}
+
+.battleButton {
+  padding: 1em;
+  font-size: 1.5em;
+  border-radius: 1rem;
+  color: white;
+}

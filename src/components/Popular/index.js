@@ -12,28 +12,29 @@ export default function Popular() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    function updateLanguage(selectedLanguage) {
+      setSelectedLanguage(selectedLanguage);
+      setError(null);
+
+      fetchPopularRepos(selectedLanguage)
+        .then((data) => {
+          setRepos(repos => {
+            const newRepos = { ...repos, [selectedLanguage]: data };
+            return newRepos;
+          });
+        })
+        .catch(() => {
+          console.warn("요청 오류: ", error);
+
+          setError({
+            error: "저장소 정보를 가져오는데 실패하였습니다.",
+          });
+        });
+    }
+
     updateLanguage(selectedLanguage);
-  }, []);
+  }, [selectedLanguage, error]);
 
-  function updateLanguage(selectedLanguage) {
-    setSelectedLanguage(selectedLanguage);
-    setError(null);
-
-    fetchPopularRepos(selectedLanguage)
-      .then((data) => {
-        setRepos({
-          ...repos,
-          [selectedLanguage]: data,
-        });
-      })
-      .catch(() => {
-        console.warn("요청 오류: ", error);
-
-        setError({
-          error: "저장소 정보를 가져오는데 실패하였습니다.",
-        });
-      });
-  }
 
   function isLoading() {
     return !repos[selectedLanguage] && error === null;
@@ -43,7 +44,7 @@ export default function Popular() {
     <>
       <LanguagesNavigation
         selected={selectedLanguage}
-        onUpdateLanguage={updateLanguage}
+        onUpdateLanguage={setSelectedLanguage}
       />
 
       {isLoading() && <Loading text="가져오는 중입니다" />}
