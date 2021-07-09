@@ -1,0 +1,44 @@
+.player {
+  font-family: 'Russo One', sans-serif;
+}
+
+.title {
+  margin: 0.7em 0;
+  font-size: 2em;
+}
+
+.titleStyle::before {
+  position: absolute;
+  content: "WINNER";
+  padding: 0.2rem;
+  color: white;
+  font-size: 0.4em;
+  line-height: 1.6em;
+  background-color: goldenrod;
+  border-radius: 0.5em;
+  transform: translateX(-4.5rem) translateY(0.4rem);
+}
+
+.score {
+  margin: 0;
+  margin-bottom: 0.5em;
+  font-size: 2em;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profileImage {
+  width: 35%;
+  height: auto;
+  opacity: 0.8;
+}
+
+.profileText {
+  text-align: start;
+  color: white;
+  opacity: 0.8;
+}

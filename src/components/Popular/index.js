@@ -35,7 +35,6 @@ export default function Popular() {
     updateLanguage(selectedLanguage);
   }, [selectedLanguage, error]);
 
-
   function isLoading() {
     return !repos[selectedLanguage] && error === null;
   }

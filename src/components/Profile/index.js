@@ -1,11 +1,10 @@
 import React from "react";
 import "./styles.css";
 
-export default function Profile({ player: { profile, score } }) {
+export default function Profile({ player: { profile, score }, index }) {
   const {
     avatar_url,
     name,
-    login,
     location,
     followers,
     following,
@@ -14,16 +13,17 @@ export default function Profile({ player: { profile, score } }) {
 
   return (
     <li className="player">
-      <p className="title">{name}</p>
-      <p>{login}</p>
-      <p>{score}</p>
-      <div className="profile">
-        <img src={avatar_url} alt="profile-img" />
-        <p>Location: {location}</p>
-        <p>Followers: {followers}</p>
-        <p>Following: {following}</p>
-        <p>Repositories: {public_repos}</p>
-      </div>
+      <p className="score">{score}</p>
+      <p className={index === 0 ? "title titleStyle" : "title"}>{name}</p>
+      <section className="profile">
+        <img className="profileImage" src={avatar_url} alt="profile-img" />
+        <div className="profileText">
+          <p>Location: {location}</p>
+          <p>Followers: {followers}</p>
+          <p>Following: {following}</p>
+          <p>Repositories: {public_repos}</p>
+        </div>
+      </section>
     </li>
   );
 }

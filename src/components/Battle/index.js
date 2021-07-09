@@ -7,9 +7,6 @@ export default function Battle({ fetchData, players }) {
   const [readyToBattle, setReadyToBattle] = useState(false);
   const [playerNames, setPlayerNames] = useState({ PLAYER1: null, PLAYER2: null });
   const PLAYERS = { NO1: "PLAYER1", NO2: "PLAYER2" };
-  const centerText = players.length
-    ? players[0].profile.name + " is Win!"
-    : "BATTLE GROUND";
 
   function handleClick() {
     const names = Object.values(playerNames);
@@ -30,23 +27,23 @@ export default function Battle({ fetchData, players }) {
 
   return (
     <>
-      <h1 className="centerText">{centerText}</h1>
+      <h1 className="centerText">{!!players.length ? "이겼닭. 오늘 저녁은 치킨이닭!" : " "}</h1>
       <section>
         <ul className="players">
           {players.length
-              ? players.map(player => <Profile key={player.profile.node_id} player={player} />)
-              : Object.keys(PLAYERS).map(key => (
-                  <Player
-                    key={key}
-                    playerNumber={PLAYERS[key]}
-                    updateInputValue={updateNames}
-                    submitData={handleClick}
-                    readyToBattle={readyToBattle}
-                  />
-                ))
+            ? players.map((player, index) => <Profile key={player.profile.node_id} index={index} player={player} />)
+            : Object.keys(PLAYERS).map(key => (
+              <Player
+                key={key}
+                playerNumber={PLAYERS[key]}
+                updateInputValue={updateNames}
+                submitData={handleClick}
+                readyToBattle={readyToBattle}
+              />
+            ))
           }
         </ul>
-        {readyToBattle && <button className="battleButton" onClick={handleClick}>BATTlE!</button>}
+        {readyToBattle && <button className="battleButton" onClick={handleClick}>BATTLE</button>}
       </section>
       <footer>
       </footer>

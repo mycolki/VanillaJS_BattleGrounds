@@ -5,13 +5,15 @@ section {
 button {
   outline: 0;
   border: 0;
-  background-color: rgb(3, 48, 49);
   cursor: pointer;
 }
 
 .centerText {
+  font-size: 1.5rem;
   text-align: center;
-  font-size: 3rem;
+  font-family: 'Russo One', sans-serif;
+  color: white;
+  transform: translateY(-3.7rem);
 }
 
 .players {
@@ -24,12 +26,16 @@ button {
 }
 
 .title {
-  font-size: 2em;
+  font-size: 1.5em;
+  font-family: 'Russo One', sans-serif;
 }
 
 .battleButton {
-  padding: 1em;
-  font-size: 1.5em;
-  border-radius: 1rem;
+  width: 5em;
+  height: 5em;
+  font-size: 1.2em;
+  line-height: 1.2em;
+  border-radius: 50%;
   color: white;
+  background-color: black;
 }

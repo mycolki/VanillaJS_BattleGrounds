@@ -1,18 +1,19 @@
 .nav-button {
   color: #cccccc;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 300;
   cursor: pointer;
   padding: 10px;
-  border-radius: 2px;
+  outline: 0;
+  border-radius: 10px;
   border: 1px solid #cccccc;
   transition: 0.3s all ease;
 }
 
 .nav-button:hover,
 .nav-button.active {
-  font-weight: 500;
+  font-weight: 600;
   color: #eeeeee;
-  background-color: #2574d0;
+  background-color: #571804;
 }

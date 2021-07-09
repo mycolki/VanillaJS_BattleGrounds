@@ -11,7 +11,7 @@ export default function Player({ updateInputValue, playerNumber, submitData, rea
       <p className="title">{playerNumber}</p>
       <input
         type="text"
-        placeholder="Enter Your ID"
+        placeholder="Enter your Github ID"
         onChange={ev => updateInputValue(ev.target.value, playerNumber)}
         onKeyPress={handleKeyPress}
       />
