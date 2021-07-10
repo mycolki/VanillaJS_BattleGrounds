@@ -90,7 +90,6 @@ export default function App() {
           readyToBattle={readyToBattle}
           loading={loading}
           error={error}
-
           names={names}
         />
       )}
