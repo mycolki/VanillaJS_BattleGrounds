@@ -60,7 +60,7 @@ export default function App() {
       return updated;
     });
 
-    const isReady = Object.values(names).every(name => name !== null);
+    const isReady = Object.values(names).every(name => name !== "");
     if (isReady) setReadyToBattle(true);
   }
 
