@@ -7,7 +7,7 @@ import "./styles.css";
 
 export default function App() {
   const [showBattlePage, setShowBattlePage] = useState(false);
-  const [playerData, setPlayerData] = useState([]);
+  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -20,13 +20,13 @@ export default function App() {
     document.body.style.backgroundImage = "";
   }, [showBattlePage]);
 
-  async function setData(names) {
+  async function setFetchedData(names) {
     setError(false);
     setLoading(true);
 
     try {
       const fetchedData = await battle(names);
-      setPlayerData(fetchedData);
+      setData(fetchedData);
     } catch (err) {
       console.error('error', err.message);
       setError(true);
@@ -40,7 +40,7 @@ export default function App() {
   }
 
   function initializeData() {
-    setPlayerData([]);
+    setData(null);
   }
 
   return (
@@ -62,9 +62,9 @@ export default function App() {
 
       {showBattlePage && (
         <Battle
-          setData={setData}
+          setData={setFetchedData}
           initializeData={initializeData}
-          data={playerData}
+          data={data}
           loading={loading}
           error={error}
         />

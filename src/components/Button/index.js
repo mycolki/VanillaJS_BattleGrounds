@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.css";
 import { BUTTONS } from "../../constants/battlegrounds";
 
-export default function Button({ readyToStart, onClickStart, onClickRestart, data }) {
+export default function Button({ readyToStart, onClickStart, onClickRestart, data, error }) {
   return (
     <>
       {readyToStart && (
@@ -13,7 +13,7 @@ export default function Button({ readyToStart, onClickStart, onClickRestart, dat
           {BUTTONS.START}
         </button>
       )}
-      {!!data.length && (
+      {(data || (!data && error)) && (
         <button
           className="restartButton playButton"
           onClick={() => onClickRestart()}

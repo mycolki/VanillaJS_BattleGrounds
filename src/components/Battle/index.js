@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Player from "../Player";
+import Input from "../Input";
 import "./styles.css";
 import Profile from '../Profile';
 import Button from '../Button';
@@ -36,7 +36,7 @@ export default function Battle({ setData, data, initializeData, loading, error }
         {loading
           ? (<Loading text={LOADING_COMMENT} />)
           : (<h1 className="centerText">
-              {!!data.length? WINNER_COMMENT : " "}
+              {data ? WINNER_COMMENT : " "}
             </h1>
         )}
         <Button
@@ -44,28 +44,27 @@ export default function Battle({ setData, data, initializeData, loading, error }
           onClickStart={startToSetData}
           onClickRestart={() => initializeData()}
           data={data}
+          error={error}
         />
       </header>
       <section className="playersContainer">
         <ul className="users">
-          {!!data.length
-            ? data.map((item, index) => (
-              <Profile
-                // key={player.profile.node_id} //**api하면 되돌리기!**/
-                key={index}
-                index={index}
-                user={item}
-              />))
-            : Object.keys(PLAYERS).map(key => (
-              <Player
-                key={key}
-                playerOrder={PLAYERS[key]}
-                updateInputValue={updateNames}
-                submitData={startToSetData}
-                readyToStart={readyToBattle}
-              />
-            ))
-          }
+          {data && data.map((item, index) => (
+            <Profile
+              key={item.profile.id}
+              index={index}
+              user={item}
+            />))}
+
+          {!data && Object.keys(PLAYERS).map(key => (
+            <Input
+              key={key}
+              playerOrder={PLAYERS[key]}
+              updateInputValue={updateNames}
+              submitData={startToSetData}
+              readyToStart={readyToBattle}
+            />
+          ))}
         </ul>
       </section>
     </>
