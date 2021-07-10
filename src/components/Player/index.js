@@ -1,20 +1,22 @@
 import React from "react";
 import "./styles.css";
 
-export default function Player({ updateInputValue, playerNumber, submitData, readyToBattle }) {
-  function handleKeyPress(ev) {
-    if (ev.key === 'Enter' && readyToBattle) submitData();
+export default function Player({ updateInputValue, playerOrder, submitData, readyToStart }) {
+  function handleSubmit(ev) {
+    ev.preventDefault();
+    if (readyToStart) submitData();
   }
 
   return (
     <li className="player">
-      <p className="title">{playerNumber}</p>
-      <input
-        type="text"
-        placeholder="Enter your Github ID"
-        onChange={ev => updateInputValue(ev.target.value, playerNumber)}
-        onKeyPress={handleKeyPress}
-      />
+      <p className="title">{playerOrder}</p>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Enter your Github ID"
+          onChange={ev => updateInputValue(ev.target.value, playerOrder)}
+        />
+      </form>
     </li>
   );
 }

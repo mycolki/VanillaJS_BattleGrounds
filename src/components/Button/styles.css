@@ -1,0 +1,27 @@
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  height: 40px;
+  margin-top: 1rem;
+}
+
+.playButton {
+  width: 141px;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 300;
+  outline: 0;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  color: white;
+  background-color: #910b06;
+  transition: 0.3s all ease;
+  cursor: pointer;
+}
+
+.playButton:hover {
+  font-weight: 600;
+  color: #910b06;
+  background-color: white;
+}

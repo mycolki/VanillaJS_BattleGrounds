@@ -2,51 +2,68 @@ import React, { useState } from "react";
 import Player from "../Player";
 import "./styles.css";
 import Profile from '../Profile';
+import Button from '../Button';
+import Loading from '../Loading';
+import { WINNER_COMMENT } from "../../constants/battlegrounds";
 
-export default function Battle({ fetchData, players }) {
+
+export default function Battle({ setData, data, initializeData }) {
   const [readyToBattle, setReadyToBattle] = useState(false);
-  const [playerNames, setPlayerNames] = useState({ PLAYER1: null, PLAYER2: null });
+  const [names, setNames] = useState({ PLAYER1: null, PLAYER2: null });
   const PLAYERS = { NO1: "PLAYER1", NO2: "PLAYER2" };
 
-  function handleClick() {
-    const names = Object.values(playerNames);
-    fetchData(names);
-    setReadyToBattle(false);
-  }
-
   function updateNames(name, order) {
-    setPlayerNames(names => {
-      const updated = { ...names };
+    setNames(prevNames => {
+      const updated = { ...prevNames };
       updated[order] = name;
       return updated;
     });
 
-    const isReady = Object.values(playerNames).every(name => name !== null);
+    const isReady = Object.values(names).every(name => name !== null);
     if (isReady) setReadyToBattle(true);
+  }
+
+  function startToSetData() {
+    const values = Object.values(names);
+    setData(values);
+    setReadyToBattle(false);
   }
 
   return (
     <>
-      <h1 className="centerText">{!!players.length ? "이겼닭. 오늘 저녁은 치킨이닭!" : " "}</h1>
-      <section>
+      <header className="header">
+        <h1 className="centerText">
+          {!!data.length ? WINNER_COMMENT : " "}
+        </h1>
+        <Button
+          readyToStart={readyToBattle}
+          onClickStart={startToSetData}
+          onClickRestart={() => initializeData()}
+          data={data}
+        />
+      </header>
+      <section className="playersContainer">
         <ul className="players">
-          {players.length
-            ? players.map((player, index) => <Profile key={player.profile.node_id} index={index} player={player} />)
+          {!!data.length
+            ? data.map((item, index) => (
+              <Profile
+                // key={player.profile.node_id} //**api하면 되돌리기!**/
+                key={index}
+                index={index}
+                user={item}
+              />))
             : Object.keys(PLAYERS).map(key => (
               <Player
                 key={key}
-                playerNumber={PLAYERS[key]}
+                playerOrder={PLAYERS[key]}
                 updateInputValue={updateNames}
-                submitData={handleClick}
-                readyToBattle={readyToBattle}
+                submitData={startToSetData}
+                readyToStart={readyToBattle}
               />
             ))
           }
         </ul>
-        {readyToBattle && <button className="battleButton" onClick={handleClick}>BATTLE</button>}
       </section>
-      <footer>
-      </footer>
     </>
   );
 }

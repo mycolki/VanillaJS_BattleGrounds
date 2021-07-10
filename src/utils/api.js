@@ -31,20 +31,20 @@ function getErrorMsg(message, username) {
   return message;
 }
 
-function request(uri) {
-  return new Promise(function (resolve, reject) {
-    const xhr = new XMLHttpRequest();
+// function request(uri) {
+//   return new Promise(function (resolve, reject) {
+//     const xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        resolve(xhr.responseText);
-      }
-    };
+//     xhr.onreadystatechange = function () {
+//       if (xhr.readyState === XMLHttpRequest.DONE) {
+//         resolve(xhr.responseText);
+//       }
+//     };
 
-    xhr.open("GET", uri, true);
-    xhr.send(null);
-  });
-}
+//     xhr.open("GET", uri, true);
+//     xhr.send(null);
+//   });
+// }
 
 // TODO: Refactor with `async/await`
 async function getProfile(username) {
@@ -53,12 +53,11 @@ async function getProfile(username) {
       resolve(PROFILE);
     });
   }
-
-  const profile = await request(
+  const data = await fetch(
     `https://api.github.com/users/${username}${defaultParams}`
   );
 
-  // console.log(`PROFILE:::`, JSON.stringify(JSON.parse(profile)));
+  const profile = await data.json();
 
   if (profile.message) throw new Error(getErrorMsg(profile.message, username));
 
@@ -73,11 +72,11 @@ async function getRepos(username) {
     });
   }
 
-  const repos = await request(
+  const data = await fetch(
     `https://api.github.com/users/${username}/repos${defaultParams}&per_page=100`
   );
 
-  // console.log(`REPOSE:::`, JSON.stringify(JSON.parse(repos)));
+  const repos = await data.json();
 
   if (repos.message) throw new Error(getErrorMsg(repos.message, username));
 
@@ -85,6 +84,7 @@ async function getRepos(username) {
 }
 
 function getStarCount(repos) {
+
   return repos.reduce(
     (count, { stargazers_count }) => count + stargazers_count,
     0

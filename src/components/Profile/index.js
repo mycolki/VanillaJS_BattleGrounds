@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 
-export default function Profile({ player: { profile, score }, index }) {
+export default function Profile({ user: { profile, score }, index }) {
   const {
     avatar_url,
     name,
@@ -12,9 +12,9 @@ export default function Profile({ player: { profile, score }, index }) {
   } = profile;
 
   return (
-    <li className="player">
-      <p className="score">{score}</p>
+    <li className="user">
       <p className={index === 0 ? "title titleStyle" : "title"}>{name}</p>
+      <p className="score">{score}</p>
       <section className="profile">
         <img className="profileImage" src={avatar_url} alt="profile-img" />
         <div className="profileText">

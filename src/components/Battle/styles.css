@@ -1,11 +1,13 @@
-section {
+.playersContainer {
   text-align: center;
 }
 
-button {
-  outline: 0;
-  border: 0;
-  cursor: pointer;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding: 1rem 0;
 }
 
 .centerText {
@@ -13,29 +15,14 @@ button {
   text-align: center;
   font-family: 'Russo One', sans-serif;
   color: white;
-  transform: translateY(-3.7rem);
-}
-
-.players {
-  display: flex;
-  flex: 1 1 100%;
 }
 
 .player {
-  width: 100%;
+  display: inline-block;
+  width: 50%;
 }
 
 .title {
   font-size: 1.5em;
   font-family: 'Russo One', sans-serif;
-}
-
-.battleButton {
-  width: 5em;
-  height: 5em;
-  font-size: 1.2em;
-  line-height: 1.2em;
-  border-radius: 50%;
-  color: white;
-  background-color: black;
 }

@@ -1,4 +1,5 @@
-.player {
+.user {
+  display: inline-block;
   font-family: 'Russo One', sans-serif;
 }
 

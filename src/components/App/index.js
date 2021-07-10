@@ -1,38 +1,38 @@
 import React, { useEffect, useState } from "react";
+import { battle } from "../../utils/api";
+import NavButton from "../NavButton";
 import Popular from "../Popular";
 import Battle from "../Battle";
-import NavButton from "../NavButton";
-import { battle } from "../../utils/api";
 import "./styles.css";
 
 export default function App() {
   const [showBattle, setShowBattle] = useState(false);
-  const [players, setPlayers] = useState([]);
+  const [playerData, setPlayerData] = useState([]);
+
+  useEffect(() => {
+    if (showBattle) {
+      document.body.style.backgroundImage = "url(/image/battle.jpeg)";
+      return;
+    }
+
+    document.body.style.backgroundImage = "";
+  }, [showBattle]);
+
+  async function setData(names) {
+    const fetchedData = await battle(names);
+    setPlayerData(fetchedData);
+  }
 
   function toggleView(showBattle) {
     setShowBattle(showBattle);
   }
 
-  async function fetchData(names) {
-    const playerData = await battle(names);
-    setPlayers(playerData);
+  function initializeData() {
+    setPlayerData([]);
   }
 
-  useEffect(() => {
-    if (showBattle) {
-      document.body.style.backgroundImage="url(/image/battle.jpeg)";
-      return;
-    }
-
-    document.body.style.backgroundImage="";
-  }, [showBattle]);
-
   return (
-    <div
-      className={showBattle
-        ? "container background"
-        : "container"}
-    >
+    <div className={showBattle ? "container background" : "container"}>
       <div className="grid space-between">
         <NavButton
           isActive={!showBattle}
@@ -45,8 +45,16 @@ export default function App() {
           onClick={() => toggleView(true)}
         />
       </div>
+
       {!showBattle && <Popular />}
-      {showBattle && <Battle fetchData={fetchData} players={players} />}
+
+      {showBattle && (
+        <Battle
+          setData={setData}
+          initializeData={initializeData}
+          data={playerData}
+        />
+      )}
     </div>
   );
 }
