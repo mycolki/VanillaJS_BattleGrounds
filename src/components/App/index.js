@@ -7,6 +7,8 @@ import "./styles.css";
 
 export default function App() {
   const [showBattlePage, setShowBattlePage] = useState(false);
+  const [readyToBattle, setReadyToBattle] = useState(false);
+  const [names, setNames] = useState({ PLAYER1: null, PLAYER2: null });
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -19,6 +21,14 @@ export default function App() {
 
     document.body.style.backgroundImage = "";
   }, [showBattlePage]);
+
+  function toggleView(showBattle) {
+    setShowBattlePage(showBattle);
+  }
+
+  function initializeData() {
+    setData(null);
+  }
 
   async function setFetchedData(names) {
     setError(false);
@@ -35,12 +45,21 @@ export default function App() {
     setLoading(false);
   }
 
-  function toggleView(showBattle) {
-    setShowBattlePage(showBattle);
+  function startToSetData() {
+    const values = Object.values(names);
+    setFetchedData(values);
+    setReadyToBattle(false);
   }
 
-  function initializeData() {
-    setData(null);
+  function updateNames(name, order) {
+    setNames(prevNames => {
+      const updated = { ...prevNames };
+      updated[order] = name;
+      return updated;
+    });
+
+    const isReady = Object.values(names).every(name => name !== null);
+    if (isReady) setReadyToBattle(true);
   }
 
   return (
@@ -62,9 +81,11 @@ export default function App() {
 
       {showBattlePage && (
         <Battle
-          setData={setFetchedData}
-          initializeData={initializeData}
           data={data}
+          updateNames={updateNames}
+          startToSetData={startToSetData}
+          initializeData={initializeData}
+          readyToBattle={readyToBattle}
           loading={loading}
           error={error}
         />

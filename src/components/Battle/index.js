@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./styles.css";
 import Input from "../Input";
 import Profile from '../Profile';
@@ -6,27 +5,8 @@ import Button from '../Button';
 import Loading from '../Loading';
 import { WINNER_COMMENT, LOADING_COMMENT, ERROR_COMMENT } from "../../constants/battlegrounds";
 
-export default function Battle({ setData, data, initializeData, loading, error }) {
-  const [readyToBattle, setReadyToBattle] = useState(false);
-  const [names, setNames] = useState({ PLAYER1: null, PLAYER2: null });
+export default function Battle({ data, updateNames, startToSetData, initializeData, readyToBattle, loading, error }) {
   const PLAYERS = { NO1: "PLAYER1", NO2: "PLAYER2" };
-
-  function updateNames(name, order) {
-    setNames(prevNames => {
-      const updated = { ...prevNames };
-      updated[order] = name;
-      return updated;
-    });
-
-    const isReady = Object.values(names).every(name => name !== null);
-    if (isReady) setReadyToBattle(true);
-  }
-
-  function startToSetData() {
-    const values = Object.values(names);
-    setData(values);
-    setReadyToBattle(false);
-  }
 
   return (
     <>
@@ -60,8 +40,8 @@ export default function Battle({ setData, data, initializeData, loading, error }
               key={key}
               playerOrder={PLAYERS[key]}
               updateInputValue={updateNames}
-              submitData={startToSetData}
               readyToStart={readyToBattle}
+              submitData={startToSetData}
             />
           ))}
         </ul>
