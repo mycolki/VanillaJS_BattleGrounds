@@ -2,8 +2,10 @@
   margin-bottom: 10px;
   width: 250px;
   padding: 20px;
-  border: 1px solid #f2f2f2;
+  border: 3px solid rgb(95, 2, 2);
   border-radius: 2px;
+  background-color: rgba(99, 1, 1, 0.219);
+  color: white;
 }
 
 .link {

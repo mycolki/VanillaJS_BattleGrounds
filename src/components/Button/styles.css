@@ -18,10 +18,25 @@
   background-color: #910b06;
   transition: 0.3s all ease;
   cursor: pointer;
+  animation: bounce 1s ease-out infinite;
 }
 
 .playButton:hover {
   font-weight: 600;
   color: #910b06;
   background-color: white;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1)
+  }
+
+  50% {
+    transform: scale(1.03)
+  }
+
+  100% {
+    transform: scale(1)
+  }
 }
