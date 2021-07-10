@@ -15,7 +15,7 @@ export default function Profile({ user: { profile, score }, index }) {
   return (
     <li className="user">
       <span className={index === 0 ? "title titleStyle" : "title"}>{name ? name : login }</span>
-      <span className="score">{score}</span>
+      <span className={index === 0 ? "score scoreStyle" : "score"}>{score}</span>
       <section className="profile">
         <img className="profileImage" src={avatar_url} alt="profile-img" />
         <div className="profileText">

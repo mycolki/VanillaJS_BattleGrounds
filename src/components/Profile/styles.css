@@ -32,6 +32,10 @@
   font-size: 2em;
 }
 
+.score.scoreStyle {
+  color: goldenrod;
+}
+
 .profile {
   display: flex;
   flex-direction: column;
