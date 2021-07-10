@@ -15,13 +15,13 @@ import POPULAR_REPOS from "./popularRepos.json";
   7. Enter your Client ID and Secret ID below
 
  */
-const GITHUB_CLIENT_ID = "3063680e5db343d2b61b";
-const GITHUB_SECRET_ID = "8139d23b8c7848e3813f47f88abe6e74f8999db9";
+const GITHUB_CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID;
+const GITHUB_SECRET_ID = process.env.REACT_APP_GITHUB_SECRET_ID;
 
 const defaultParams = `?client_id=${GITHUB_CLIENT_ID}&client_secret=${GITHUB_SECRET_ID}`;
 
 // NOTE: Toggle this value to use mock data.
-const USE_MOCK_DATA = true;
+const USE_MOCK_DATA = false;
 
 function getErrorMsg(message, username) {
   if (message === "Not Found") {
@@ -30,21 +30,6 @@ function getErrorMsg(message, username) {
 
   return message;
 }
-
-// function request(uri) {
-//   return new Promise(function (resolve, reject) {
-//     const xhr = new XMLHttpRequest();
-
-//     xhr.onreadystatechange = function () {
-//       if (xhr.readyState === XMLHttpRequest.DONE) {
-//         resolve(xhr.responseText);
-//       }
-//     };
-
-//     xhr.open("GET", uri, true);
-//     xhr.send(null);
-//   });
-// }
 
 // TODO: Refactor with `async/await`
 async function getProfile(username) {
@@ -110,10 +95,13 @@ function sortPlayers(players) {
 }
 
 export async function battle([player1, player2]) {
-  const playerOne = getUserData(player1);
-  const playerTwo = getUserData(player2);
+  // const promises = [getUserData(player1), getUserData(player2)];
+  // return sortPlayers(Promise.allSettled(promises));
+  // console.log(Promise.allSettled(promises));
+  const playerOne = await getUserData(player1);
+  const playerTwo = await getUserData(player2);
 
-  return sortPlayers([await playerOne, await playerTwo]);
+  return sortPlayers([playerOne, playerTwo]);
 }
 
 export async function fetchPopularRepos(language) {

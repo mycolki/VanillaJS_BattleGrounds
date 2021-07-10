@@ -6,6 +6,7 @@ export default function Profile({ user: { profile, score }, index }) {
     avatar_url,
     name,
     location,
+    login,
     followers,
     following,
     public_repos
@@ -13,15 +14,15 @@ export default function Profile({ user: { profile, score }, index }) {
 
   return (
     <li className="user">
-      <p className={index === 0 ? "title titleStyle" : "title"}>{name}</p>
+      <p className={index === 0 ? "title titleStyle" : "title"}>{name ? name : login }</p>
       <p className="score">{score}</p>
       <section className="profile">
         <img className="profileImage" src={avatar_url} alt="profile-img" />
         <div className="profileText">
-          <p>Location: {location}</p>
-          <p>Followers: {followers}</p>
-          <p>Following: {following}</p>
-          <p>Repositories: {public_repos}</p>
+          <p className="text">Location: {location}</p>
+          <p className="text">Followers: {followers}</p>
+          <p className="text">Following: {following}</p>
+          <p className="text">Repositories: {public_repos}</p>
         </div>
       </section>
     </li>

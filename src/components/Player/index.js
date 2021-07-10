@@ -8,7 +8,7 @@ export default function Player({ updateInputValue, playerOrder, submitData, read
   }
 
   return (
-    <li className="player">
+    <li className="user">
       <p className="title">{playerOrder}</p>
       <form onSubmit={handleSubmit}>
         <input

@@ -17,7 +17,7 @@ export default function Loading({ text, speed }) {
     }
   }, [contents, speed, text]);
 
-  return <p className="content">{contents}</p>;
+  return <h1 className="centerText">{contents}</h1>;
 }
 
 Loading.propTypes = {

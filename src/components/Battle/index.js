@@ -4,10 +4,10 @@ import "./styles.css";
 import Profile from '../Profile';
 import Button from '../Button';
 import Loading from '../Loading';
-import { WINNER_COMMENT } from "../../constants/battlegrounds";
+import { WINNER_COMMENT, LOADING_COMMENT, ERROR_COMMENT } from "../../constants/battlegrounds";
 
 
-export default function Battle({ setData, data, initializeData }) {
+export default function Battle({ setData, data, initializeData, loading, error }) {
   const [readyToBattle, setReadyToBattle] = useState(false);
   const [names, setNames] = useState({ PLAYER1: null, PLAYER2: null });
   const PLAYERS = { NO1: "PLAYER1", NO2: "PLAYER2" };
@@ -32,9 +32,13 @@ export default function Battle({ setData, data, initializeData }) {
   return (
     <>
       <header className="header">
-        <h1 className="centerText">
-          {!!data.length ? WINNER_COMMENT : " "}
-        </h1>
+        {(error) && <h1 className="centerText errorText">{ERROR_COMMENT}</h1>}
+        {loading
+          ? (<Loading text={LOADING_COMMENT} />)
+          : (<h1 className="centerText">
+              {!!data.length? WINNER_COMMENT : " "}
+            </h1>
+        )}
         <Button
           readyToStart={readyToBattle}
           onClickStart={startToSetData}
@@ -43,7 +47,7 @@ export default function Battle({ setData, data, initializeData }) {
         />
       </header>
       <section className="playersContainer">
-        <ul className="players">
+        <ul className="users">
           {!!data.length
             ? data.map((item, index) => (
               <Profile

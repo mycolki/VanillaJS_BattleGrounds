@@ -6,25 +6,37 @@ import Battle from "../Battle";
 import "./styles.css";
 
 export default function App() {
-  const [showBattle, setShowBattle] = useState(false);
+  const [showBattlePage, setShowBattlePage] = useState(false);
   const [playerData, setPlayerData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (showBattle) {
+    if (showBattlePage) {
       document.body.style.backgroundImage = "url(/image/battle.jpeg)";
       return;
     }
 
     document.body.style.backgroundImage = "";
-  }, [showBattle]);
+  }, [showBattlePage]);
 
   async function setData(names) {
-    const fetchedData = await battle(names);
-    setPlayerData(fetchedData);
+    setError(false);
+    setLoading(true);
+
+    try {
+      const fetchedData = await battle(names);
+      setPlayerData(fetchedData);
+    } catch (err) {
+      console.error('error', err.message);
+      setError(true);
+    }
+
+    setLoading(false);
   }
 
   function toggleView(showBattle) {
-    setShowBattle(showBattle);
+    setShowBattlePage(showBattle);
   }
 
   function initializeData() {
@@ -32,27 +44,29 @@ export default function App() {
   }
 
   return (
-    <div className={showBattle ? "container background" : "container"}>
+    <div className={showBattlePage ? "container background" : "container"}>
       <div className="grid space-between">
         <NavButton
-          isActive={!showBattle}
+          isActive={!showBattlePage}
           text="POPULAR STORAGE"
           onClick={() => toggleView(false)}
         />
         <NavButton
-          isActive={showBattle}
+          isActive={showBattlePage}
           text="GITHUB BATTLE"
           onClick={() => toggleView(true)}
         />
       </div>
 
-      {!showBattle && <Popular />}
+      {!showBattlePage && <Popular />}
 
-      {showBattle && (
+      {showBattlePage && (
         <Battle
           setData={setData}
           initializeData={initializeData}
           data={playerData}
+          loading={loading}
+          error={error}
         />
       )}
     </div>
