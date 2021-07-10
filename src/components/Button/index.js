@@ -3,6 +3,7 @@ import "./styles.css";
 import { BUTTONS } from "../../constants/battlegrounds";
 
 export default function Button({ readyToStart, onClickStart, onClickRestart, data, error }) {
+  console.log(error)
   return (
     <>
       {readyToStart && (
@@ -13,7 +14,7 @@ export default function Button({ readyToStart, onClickStart, onClickRestart, dat
           {BUTTONS.START}
         </button>
       )}
-      {!readyToStart && (
+      {(data || error) && (
         <button
           className="restartButton playButton"
           onClick={() => onClickRestart()}
