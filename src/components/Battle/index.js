@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import Input from "../Input";
 import "./styles.css";
+import Input from "../Input";
 import Profile from '../Profile';
 import Button from '../Button';
 import Loading from '../Loading';
 import { WINNER_COMMENT, LOADING_COMMENT, ERROR_COMMENT } from "../../constants/battlegrounds";
-
 
 export default function Battle({ setData, data, initializeData, loading, error }) {
   const [readyToBattle, setReadyToBattle] = useState(false);

@@ -95,9 +95,6 @@ function sortPlayers(players) {
 }
 
 export async function battle([player1, player2]) {
-  // const promises = [getUserData(player1), getUserData(player2)];
-  // return sortPlayers(Promise.allSettled(promises));
-  // console.log(Promise.allSettled(promises));
   const playerOne = await getUserData(player1);
   const playerTwo = await getUserData(player2);
 
