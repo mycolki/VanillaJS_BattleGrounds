@@ -28,6 +28,7 @@ export default function App() {
 
   function initializeData() {
     setData(null);
+    setError(false);
     setNames({ PLAYER1: "", PLAYER2: "" });
   }
 

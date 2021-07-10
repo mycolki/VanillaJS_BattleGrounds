@@ -13,7 +13,7 @@ export default function Button({ readyToStart, onClickStart, onClickRestart, dat
           {BUTTONS.START}
         </button>
       )}
-      {(data || (!data && error)) && (
+      {!readyToStart && (
         <button
           className="restartButton playButton"
           onClick={() => onClickRestart()}
