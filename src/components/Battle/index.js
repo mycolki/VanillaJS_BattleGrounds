@@ -6,8 +6,6 @@ import Loading from '../Loading';
 import { WINNER_COMMENT, LOADING_COMMENT, ERROR_COMMENT, PLAYERS } from "../../constants/battlegrounds";
 
 export default function Battle({ data, updateNames, startToSetData, initializeData, readyToBattle, loading, error , names }) {
-  
-
   return (
     <>
       <header className="header">
@@ -42,7 +40,6 @@ export default function Battle({ data, updateNames, startToSetData, initializeDa
               updateInputValue={updateNames}
               readyToStart={readyToBattle}
               submitData={startToSetData}
-
               names={names}
             />
           ))}

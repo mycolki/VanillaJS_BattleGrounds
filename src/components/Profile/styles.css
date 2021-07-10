@@ -4,8 +4,13 @@
 }
 
 .title {
+  display: block;
   margin: 0.7em 0;
   font-size: 2em;
+}
+
+.titleStyle {
+  color: goldenrod;
 }
 
 .titleStyle::before {
@@ -21,6 +26,7 @@
 }
 
 .score {
+  display: block;
   margin: 0;
   margin-bottom: 0.5em;
   font-size: 2em;
@@ -45,5 +51,6 @@
 }
 
 .text {
+  display: block;
   margin-top: 1rem;
 }

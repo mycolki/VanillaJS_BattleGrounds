@@ -48,8 +48,7 @@ export default function App() {
   }
 
   function startToSetData() {
-    const values = Object.values(names);
-    setFetchedData(values);
+    setFetchedData(Object.values(names));
     setReadyToBattle(false);
   }
 

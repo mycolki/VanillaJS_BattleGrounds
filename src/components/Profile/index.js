@@ -14,15 +14,15 @@ export default function Profile({ user: { profile, score }, index }) {
 
   return (
     <li className="user">
-      <p className={index === 0 ? "title titleStyle" : "title"}>{name ? name : login }</p>
-      <p className="score">{score}</p>
+      <span className={index === 0 ? "title titleStyle" : "title"}>{name ? name : login }</span>
+      <span className="score">{score}</span>
       <section className="profile">
         <img className="profileImage" src={avatar_url} alt="profile-img" />
         <div className="profileText">
-          <p className="text">Location: {location}</p>
-          <p className="text">Followers: {followers}</p>
-          <p className="text">Following: {following}</p>
-          <p className="text">Repositories: {public_repos}</p>
+          <span className="text">Location: {location}</span>
+          <span className="text">Followers: {followers}</span>
+          <span className="text">Following: {following}</span>
+          <span className="text">Repositories: {public_repos}</span>
         </div>
       </section>
     </li>
