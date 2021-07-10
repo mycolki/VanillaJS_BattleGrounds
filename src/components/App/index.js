@@ -8,7 +8,7 @@ import "./styles.css";
 export default function App() {
   const [showBattlePage, setShowBattlePage] = useState(false);
   const [readyToBattle, setReadyToBattle] = useState(false);
-  const [names, setNames] = useState({ PLAYER1: null, PLAYER2: null });
+  const [names, setNames] = useState({ PLAYER1: "", PLAYER2: "" });
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -28,6 +28,7 @@ export default function App() {
 
   function initializeData() {
     setData(null);
+    setNames({ PLAYER1: "", PLAYER2: "" });
   }
 
   async function setFetchedData(names) {
@@ -88,6 +89,8 @@ export default function App() {
           readyToBattle={readyToBattle}
           loading={loading}
           error={error}
+
+          names={names}
         />
       )}
     </div>

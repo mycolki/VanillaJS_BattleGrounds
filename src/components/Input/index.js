@@ -1,10 +1,14 @@
 import React from "react";
 import "./styles.css";
 
-export default function Player({ updateInputValue, playerOrder, submitData, readyToStart }) {
+export default function Input({ updateInputValue, playerOrder, submitData, readyToStart, names }) {
   function handleSubmit(ev) {
     ev.preventDefault();
     if (readyToStart) submitData();
+  }
+
+  function handleChange(ev) {
+    updateInputValue(ev.target.value, playerOrder);
   }
 
   return (
@@ -13,8 +17,9 @@ export default function Player({ updateInputValue, playerOrder, submitData, read
       <form onSubmit={handleSubmit}>
         <input
           type="text"
+          value={names[playerOrder]}
           placeholder="Enter your Github ID"
-          onChange={ev => updateInputValue(ev.target.value, playerOrder)}
+          onChange={handleChange}
         />
       </form>
     </li>

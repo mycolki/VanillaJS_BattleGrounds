@@ -3,10 +3,10 @@ import Input from "../Input";
 import Profile from '../Profile';
 import Button from '../Button';
 import Loading from '../Loading';
-import { WINNER_COMMENT, LOADING_COMMENT, ERROR_COMMENT } from "../../constants/battlegrounds";
+import { WINNER_COMMENT, LOADING_COMMENT, ERROR_COMMENT, PLAYERS } from "../../constants/battlegrounds";
 
-export default function Battle({ data, updateNames, startToSetData, initializeData, readyToBattle, loading, error }) {
-  const PLAYERS = { NO1: "PLAYER1", NO2: "PLAYER2" };
+export default function Battle({ data, updateNames, startToSetData, initializeData, readyToBattle, loading, error , names }) {
+  
 
   return (
     <>
@@ -42,6 +42,8 @@ export default function Battle({ data, updateNames, startToSetData, initializeDa
               updateInputValue={updateNames}
               readyToStart={readyToBattle}
               submitData={startToSetData}
+
+              names={names}
             />
           ))}
         </ul>
