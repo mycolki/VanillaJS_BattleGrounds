@@ -7,10 +7,11 @@
   display: block;
   margin: 0.7em 0;
   font-size: 2em;
+  color: rgba(255, 255, 255, 0.63);
 }
 
 .titleStyle {
-  color: goldenrod;
+  color: rgba(218, 165, 32, 0.89);
 }
 
 .titleStyle::before {
@@ -30,10 +31,11 @@
   margin: 0;
   margin-bottom: 0.5em;
   font-size: 2em;
+  color: rgba(255, 255, 255, 0.63);
 }
 
-.score.scoreStyle {
-  color: goldenrod;
+.scoreStyle {
+  color: rgba(0, 173, 253, 0.856);
 }
 
 .profile {
@@ -50,8 +52,11 @@
 
 .profileText {
   text-align: start;
-  color: white;
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.63);
+}
+
+.profileTextStyle {
+  color: rgba(0, 173, 253, 0.753);
 }
 
 .text {

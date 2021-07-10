@@ -18,7 +18,7 @@ export default function Profile({ user: { profile, score }, index }) {
       <span className={index === 0 ? "score scoreStyle" : "score"}>{score}</span>
       <section className="profile">
         <img className="profileImage" src={avatar_url} alt="profile-img" />
-        <div className="profileText">
+        <div className={index === 0 ? "profileText profileTextStyle" : "profileText"}>
           <span className="text">Location: {location}</span>
           <span className="text">Followers: {followers}</span>
           <span className="text">Following: {following}</span>
