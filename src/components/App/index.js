@@ -8,8 +8,11 @@ import "./styles.css";
 export default function App() {
   const [showBattlePage, setShowBattlePage] = useState(false);
   const [readyToBattle, setReadyToBattle] = useState(false);
+  const [startBattle, setStartBattle] = useState(false);
+
   const [names, setNames] = useState({ PLAYER1: "", PLAYER2: "" });
   const [data, setData] = useState(null);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -27,29 +30,34 @@ export default function App() {
   }
 
   function initializeData() {
+    setNames({ PLAYER1: "", PLAYER2: "" });
     setData(null);
     setError(false);
-    setNames({ PLAYER1: "", PLAYER2: "" });
   }
 
-  async function setFetchedData(names) {
-    setError(false);
-    setLoading(true);
+  useEffect(() => {
+    (async function setFetchedData(names) {
+      if (!startBattle) return;
 
-    try {
-      const fetchedData = await battle(names);
-      setData(fetchedData);
-    } catch (err) {
-      console.error('error', err.message);
-      setError(true);
-    }
+      setError(false);
+      setLoading(true);
 
-    setLoading(false);
-  }
+      try {
+        const fetchedData = await battle(names);
+        setData(fetchedData);
+      } catch (err) {
+        console.error('error', err.message);
+        setError(true);
+      }
+
+      setLoading(false);
+      setStartBattle(false);
+    })(Object.values(names));
+  }, [startBattle, names]);
 
   function startToSetData() {
-    setFetchedData(Object.values(names));
     setReadyToBattle(false);
+    setStartBattle(true);
   }
 
   function updateNames(name, order) {
